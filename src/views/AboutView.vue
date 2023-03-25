@@ -1,8 +1,8 @@
 <script lang="ts">
   import { $moment } from '../utils';
 
-  import List from './List.vue';
-  import Error from './Error.vue';
+  import List from './List-view.views.vue';
+  import Error from './Error-view.views.vue';
 
   import ComponentA from '../components/Componant-a.vue';
   import ComponentB from '../components/Component-b.vue';
@@ -10,7 +10,7 @@
   import SlotComponent from '../components/SlotComponent.vue';
 
   import CustomInput from '../components/CustomInput.vue';
-  import Diretive from '../components/Directive.vue';
+  import Diretive from '../components/setNodeColor.directive.vue';
 
   import { defineAsyncComponent } from 'vue';
 
@@ -88,7 +88,7 @@
     mounted: function() {
       console.log(`mounted-${this.step++}`);
       console.log(this.$refs);
-      this.interval = setInterval(()=>{
+      this.interval = window.setInterval(()=>{
         this.now = $moment(Date.now()).format('MM/DD/YYYY HH:mm:ss');
         this.user.lastName = `${this.user.lastName.slice(0 ,this.user.lastName.toString().indexOf('-'))}-${this.timer++}`;
       }, 1000);
@@ -117,7 +117,7 @@
       }
     },
     watch: {
-      question(newValue: string, oldValue: string) {
+      question(newValue: string) {
         if (this.answer === 'Waiting' || newValue.lastIndexOf('?') !== newValue.length - 1) {
           return;
         }
@@ -131,7 +131,7 @@
         }
       },
       user: {
-        handler(newValue: IUser, oldValue: IUser) {
+        handler(newValue: IUser) {
           console.log('user-newValue: ', newValue.lastName);
         },
         deep: false
@@ -166,7 +166,6 @@
       }
     },
     errorCaptured(e) {
-      debugger;
       console.log('error-captue-->', e);
       return true;
     }
