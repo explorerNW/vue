@@ -19,7 +19,17 @@ module.exports = {
       ]
     }
   ],
+  rules: {
+    "vue/multi-word-component-names": "off"
+  },
   parserOptions: {
     ecmaVersion: 'latest'
+  },
+  "globals": {
+    "process": true,
+    "globalThis": true,
+    "__filename": true,
+    "__dirname": true,
+    "module": true
   }
 }
